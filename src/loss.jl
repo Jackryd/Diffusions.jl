@@ -121,7 +121,7 @@ function standardloss(
         x_masked = x[:, masked_indices]
         losses = logitcrossentropy.(eachslice(x̂, dims=3), eachslice(x, dims=3))
 
-        return sum(losses .* scaling_factor)
+        return mean(losses .* scaling_factor)
 
     end
 end
