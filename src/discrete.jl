@@ -100,9 +100,9 @@ function _endpoint_conditioned_sample(
     α_t = process.α(t)[1]
 
     for i in 1:sequence_length
-        token_slice = (i-1)*vocab_size + 1 : i*vocab_size
+        token_slice = (i-1)*process.vocab_size + 1 : i*process.vocab_size
         if xt[token_slice[process.mask_token_id]]
-            probs = zeros(Float32, vocab_size)
+            probs = zeros(Float32, process.vocab_size)
             probs[process.mask_token_id] = 1 - α_s
             predicted_token = findfirst(x0[token_slice])
             probs[predicted_token] = α_s - α_t
